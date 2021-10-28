@@ -11,6 +11,8 @@ public interface LeadService {
 
   LeadDTO getById(long id);
 
+  List<LeadDTO> getBySalesRepId(long salesRepId);
+
   LeadDTO create(NewLeadDTO newLead);
 
   LeadDTO delete(long id);

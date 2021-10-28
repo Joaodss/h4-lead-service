@@ -37,6 +37,14 @@ public class LeadServiceImpl implements LeadService {
     return storedLead.map(LeadDTO::new).orElseThrow(() -> new NoSuchElementException("Lead Not found"));
   }
 
+  public List<LeadDTO> getBySalesRepId(long salesRepId) {
+    var storedList = leadRepository.findBySalesRepId(salesRepId);
+    var leadDTOList = new ArrayList<LeadDTO>();
+    for (Lead storedLead : storedList)
+      leadDTOList.add(new LeadDTO(storedLead));
+    return leadDTOList;
+  }
+
   public LeadDTO create(NewLeadDTO newLeadDTO) {
     var savedLead = leadRepository.save(new Lead(newLeadDTO));
     return getById(savedLead.getId());

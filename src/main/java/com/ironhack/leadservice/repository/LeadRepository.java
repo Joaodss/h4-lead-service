@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface LeadRepository extends JpaRepository<Lead, Long> {
 
+  List<Lead> findBySalesRepId(long id);
+
   //Report Lead by SalesRep (count grouped by salesRepId)
   @Query("SELECT l.salesRepId, COUNT(l) FROM Lead l GROUP BY l.salesRepId")
   List<Object[]> findCountLeadsBySalesRepId();

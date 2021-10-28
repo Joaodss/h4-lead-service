@@ -48,6 +48,16 @@ public class LeadControllerImpl implements LeadController {
     }
   }
 
+  @GetMapping("/by-sales-rep/{id}")
+  @ResponseStatus(OK)
+  public List<LeadDTO> getLeadBySalesRepId(@PathVariable long id) {
+    try {
+      return leadService.getBySalesRepId(id);
+    } catch (Exception e) {
+      throw new ResponseStatusException(INTERNAL_SERVER_ERROR, e.getMessage());
+    }
+  }
+
   @PostMapping
   @ResponseStatus(CREATED)
   public LeadDTO createLead(@RequestBody NewLeadDTO newLead) {
@@ -70,7 +80,7 @@ public class LeadControllerImpl implements LeadController {
     }
   }
 
-  @GetMapping("/report/count_by_sales_rep")
+  @GetMapping("/report/count-by-sales-rep")
   @ResponseStatus(OK)
   public List<LeadCountBySalesRepDTO> getCountLeadsBySalesRepId() {
     try {
