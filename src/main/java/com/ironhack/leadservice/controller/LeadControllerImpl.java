@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping("/lead")
+@RequestMapping("/leads")
 public class LeadControllerImpl implements LeadController {
   private final LeadService leadService;
   private final ReportService reportService;
