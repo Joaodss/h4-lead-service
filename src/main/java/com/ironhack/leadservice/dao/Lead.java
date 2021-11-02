@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,20 +31,11 @@ public class Lead {
   @Column(name = "company_name")
   private String companyName;
 
-  //  @ManyToOne
-  //  @JoinColumn(name = "sales_rep_id", referencedColumnName = "id")
   @Column(name = "sales_rep_id")
   private Long salesRepId;
 
 
   // -------------------- Constructors --------------------
-  public Lead(String name, String phoneNumber, String email, String companyName) {
-    this.name = name;
-    this.phoneNumber = phoneNumber;
-    this.email = email;
-    this.companyName = companyName;
-  }
-
   public Lead(String name, String phoneNumber, String email, String companyName, Long salesRepId) {
     this.name = name;
     this.phoneNumber = phoneNumber;
@@ -63,56 +53,4 @@ public class Lead {
     this.salesRepId = newLeadDTO.getSalesRep();
   }
 
-
-  // -------------------- Getters & Setters (TODO with validation?) --------------------
- /*
-  public void setName(String name) throws NameContainsNumbersException, EmptyStringException, ExceedsMaxLength {
-    if (name.isEmpty()) {
-      throw new EmptyStringException("No name input. Please try again.");
-    }
-    else if(!name.matches("[a-zA-Z\\u00C0-\\u00FF\\s]+")){
-      throw new NameContainsNumbersException( "Name can not contain numbers. Please try again.");
-    } else if(name.length()>43){
-      throw new ExceedsMaxLength("Exceeds maximum value of 43 characters. Please try again.");
-    }
-
-    this.name = name;
-  }
-
-  public void setPhoneNumber(String phoneNumber) throws EmptyStringException, PhoneNumberContainsLettersException, ExceedsMaxLength {
-
-    if (phoneNumber.isEmpty()) {
-      throw new EmptyStringException("No Phone Number input. Please try again.");
-    }
-    else if(!phoneNumber.matches("[0-9]+")) {
-      throw new PhoneNumberContainsLettersException("The phone number must only contain numbers. Please try again.");
-    } else if(phoneNumber.length()>20) {
-      throw new ExceedsMaxLength("Exceeds maximum value of 20 characters. Please try again.");
-    }
-    this.phoneNumber = phoneNumber;
-  }
-
-
-  public void setEmail(String email) throws EmailNotValidException, EmptyStringException, ExceedsMaxLength {
-    if (email.isEmpty()) {
-      throw new EmptyStringException("No email input. Please, try again.");
-    }
-    else if (!EmailValidator.getInstance().isValid(email)){
-      throw new EmailNotValidException("The email should follow the format \"***@***.**\". Please, try again.");
-    } else if (email.length()>40){
-      throw new ExceedsMaxLength("Exceeds maximum value of 40 characters. Please, try again.");
-    }
-    this.email = email;
-  }
-
-
-  public void setCompanyName(String companyName) throws EmptyStringException, ExceedsMaxLength {
-    if (companyName.isEmpty()) {
-      throw new EmptyStringException("No company name input. Please, try again.");
-    } else if (companyName.length()>43){
-      throw new ExceedsMaxLength("Exceeds maximum value of 43 characters. Please, try again.");
-    }
-    this.companyName = companyName;
-  }
-*/
 }
