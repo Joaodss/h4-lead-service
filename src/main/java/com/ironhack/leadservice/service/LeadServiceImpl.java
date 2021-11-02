@@ -32,7 +32,6 @@ public class LeadServiceImpl implements LeadService {
 
   public LeadDTO getById(long id) {
     var storedLead = leadRepository.findById(id);
-    // TODO: JA - should it return null or throw an exception? How are we going to handle exceptions?
     // If present it will create a lead with itself. If not present throw error?
     return storedLead.map(LeadDTO::new).orElseThrow(() -> new NoSuchElementException("Lead Not found"));
   }
