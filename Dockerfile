@@ -1,4 +1,5 @@
 FROM openjdk:17-alpine
-COPY target/lead-service-*.jar lead-service/lead-service.jar
-WORKDIR lead-service
-CMD ["java","-jar","lead-service.jar"]
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} lead-service.jar
+ENTRYPOINT ["java","-jar","/discovery-service.jar"]
+EXPOSE 8100
