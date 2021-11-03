@@ -6,6 +6,6 @@ RUN mvn clean -f pom.xml
 RUN mvn -B package -f pom.xml -DskipTests
 
 FROM openjdk:17-alpine
-COPY /workspace/target/*.jar /workspace/lead-service.jar
-ENTRYPOINT ["java","-jar","/workspace/lead-service.jar"]
+COPY --from=build /workspace/target/*.jar lead-service.jar
+ENTRYPOINT ["java","-jar","lead-service.jar"]
 EXPOSE 8100
