@@ -1,5 +1,5 @@
 FROM maven:3.8.3-openjdk-17-slim
-RUN mvn -B clean --file pom.xml
+RUN mvn clean
 RUN mvn -B package --file pom.xml -DskipTests
 
 FROM openjdk:17-alpine
