@@ -19,9 +19,9 @@ public class ReportServiceImpl implements ReportService {
 
   // -------------------- Methods --------------------
   public List<LeadCountBySalesRepDTO> getCountLeadsBySalesRepId() {
-    var storedLeadCountBySalesRepList = leadRepository.findCountLeadsBySalesRepId();
+    List<Object[]> storedLeadCountBySalesRepList = leadRepository.findCountLeadsBySalesRepId();
     // Transform and return report as LeadCountBySalesRepDTO(salesRepId, count) list.
-    var leadCountBySalesRepDTOList = new ArrayList<LeadCountBySalesRepDTO>();
+    List<LeadCountBySalesRepDTO> leadCountBySalesRepDTOList = new ArrayList<>();
     for (Object[] objects : storedLeadCountBySalesRepList) {
       leadCountBySalesRepDTOList.add(
           new LeadCountBySalesRepDTO((Long) objects[0], (Long) objects[1])

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class LeadServiceImpl implements LeadService {
@@ -22,35 +23,35 @@ public class LeadServiceImpl implements LeadService {
 
   // -------------------- Methods --------------------
   public List<LeadDTO> getAll() {
-    var storedList = leadRepository.findAll();
+    List<Lead> storedList = leadRepository.findAll();
     // Transform and return leads as LeadDTO list.
-    var leadDTOList = new ArrayList<LeadDTO>();
+    List<LeadDTO> leadDTOList = new ArrayList<>();
     for (Lead storedLead : storedList)
       leadDTOList.add(new LeadDTO(storedLead));
     return leadDTOList;
   }
 
   public LeadDTO getById(long id) {
-    var storedLead = leadRepository.findById(id);
+    Optional<Lead> storedLead = leadRepository.findById(id);
     // If present it will create a lead with itself. If not present throw error?
     return storedLead.map(LeadDTO::new).orElseThrow(() -> new NoSuchElementException("Lead Not found"));
   }
 
   public List<LeadDTO> getBySalesRepId(long salesRepId) {
-    var storedList = leadRepository.findBySalesRepId(salesRepId);
-    var leadDTOList = new ArrayList<LeadDTO>();
+    List<Lead> storedList = leadRepository.findBySalesRepId(salesRepId);
+    List<LeadDTO> leadDTOList = new ArrayList<>();
     for (Lead storedLead : storedList)
       leadDTOList.add(new LeadDTO(storedLead));
     return leadDTOList;
   }
 
   public LeadDTO create(NewLeadDTO newLeadDTO) {
-    var savedLead = leadRepository.save(new Lead(newLeadDTO));
+    Lead savedLead = leadRepository.save(new Lead(newLeadDTO));
     return getById(savedLead.getId());
   }
 
   public LeadDTO delete(long id) {
-    var deletedLead = getById(id);
+    LeadDTO deletedLead = getById(id);
     leadRepository.deleteById(id);
     return deletedLead;
   }
