@@ -1,4 +1,4 @@
-FROM maven:3.8.3-openjdk-17-slim
+FROM maven:3.8.3-openjdk-17-slim AS build
 WORKDIR /workspace
 COPY pom.xml /workspace
 COPY src /workspace/src
